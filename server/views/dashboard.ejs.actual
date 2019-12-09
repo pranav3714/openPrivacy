@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+    <style type="text/css">
+      * {
+        font-family: 'Livvic', sans-serif;
+      }
+      body {
+    background-image: url('background.jpeg');
+      }
+      .button {
+        color: white;
+        background-color: green;
+        margin-left: 45%;
+        margin-top: 1%;
+        padding: 12px 24px;
+        font-size: 25px;
+        font-weight: bold;
+        border: none;
+      }
+.progress {
+  height: 1.8em;
+  width: 100%;
+  background-color: #c9c9c9;
+  position: relative;
+}
+.progress:before {
+  content: attr(data-label);
+  font-size: 0.8em;
+  position: absolute;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  top: 5px;
+  left: 0;
+  right: 0;
+}
+.progress .value {
+  background-color: #7cc4ff;
+  display: inline-block;
+  height: 100%;
+}
+    </style>
+  </head>
+  <body>
+    <div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active text-white" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Profile</a>
+      <a class="nav-link text-white" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true">Files</a>
+      <a class="nav-link text-white" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Upload</a>
+      <a class="nav-link text-white" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Donate</a>
+      <a class="nav-link text-white" id="v-pills-logout-tab" data-toggle="pill" href="#v-pills-logout" role="tab" aria-controls="v-pills-logout" aria-selected="false">Log Out</a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+      <section>
+        <div class="container-fluid">
+          <h4 class="mr-5">Profile Info</h4>
+          <div class="row">
+            <img src="user-ico.png" alt="..." class="rounded-circle" width="150" height="150">
+          </div>
+          <div class="row">
+            <div class="alert alert-primary mt-5 pt-2 col-4 mr-2 col-lg-1" role="alert">
+              Name
+            </div>
+            <div id="displayName" class="alert alert-secondary col-lg-4 col-5 mr-2 mt-5" role="alert">
+             
+            </div>
+          </div>
+          <div class="row">
+            <div class="alert alert-primary pt-2 mr-2 col-lg-1" role="alert">
+              Email
+            </div>
+            <div id="displayEmail" class="alert alert-secondary col-lg-4 col-5 mr-2" role="alert">
+             
+            </div>
+          </div>
+          
+        </div>
+
+      </section>
+      </div>
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <div class="container-fluid">
+            <div class="row" id="filePanel">
+              
+              </div>
+              </div>              
+            </div>
+      
+      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+      <section class="text-white">
+        <!--
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile02">
+              <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+            </div>
+          <div class="input-group-append">
+          <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+          </div>
+          </div>
+         -->
+         <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+         <strong>Make sure that the file size is less than 100MB</strong>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       </div>
+         <form id = "uploadbanner" method = "post" enctype="multipart/form-data">
+          <div class="custom-file mt-2">
+            <input id = "fileupload" type = "file" class="custom-file-input mb-0 pb-0"/>
+            <label id='filelabel' class="custom-file-label" for="fileupload">Choose file</label>
+          </div>
+            <button type='submit' id="submit" class="button">Upload</button>
+         </form>
+         <div class="container-fluid" id="progressPanel">
+            
+         </div>
+         <!--
+          ##########################################################################
+         -->
+      </section>
+      </div>
+      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+      <section class="text-white">Donate Content</section>
+      </div>
+      <div class="tab-pane fade" id="v-pills-logout" role="tabpanel" aria-labelledby="v-pills-logout-tab">
+      <section class="text-dark">
+        <div class="jumbotron">
+          <h1 class="display-4" id="greetUser"></h1>
+          <p class="lead">Are you sure you want to logout?</p>
+          <hr class="my-4">
+          <p class="text-primary">Alert! please take proper care of your 'secret_keep_me_safe' file generated during the registeration process and if not then the password. If lost we have no means to recover your account as we don't store your passwords anywhere as a measure taken to secure your valuable privacy.</p>
+          <p class="lead">
+            <a class="btn btn-danger btn-lg" href="#" id="btnLogout" role="button">Log Out</a>
+          </p>
+        </div>
+      </section>
+      </div>
+  </div>
+</div>
+
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">File download list</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <p>Do not close while downloading!</p>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+  
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        let password = localStorage.getItem('password')
+        /*console.log(password)
+        let cipherText = CryptoJS.AES.encrypt('text file', password).toString()
+        console.log(cipherText)
+        let plainText = CryptoJS.AES.decrypt(cipherText, password).toString(CryptoJS.enc.Utf8)
+        console.log(plainText)*/
+        $('#fileupload').change(function(e) {
+          //console.log(e)
+          console.log(e.currentTarget.value)
+          let list = e.currentTarget.value.split('\\')
+          console.log(list[list.length-1])
+          $('#filelabel').text(list[list.length-1])
+        })
+
+        //for(let i=0;i<10;i++){
+          //$('#filePanel').append(cartTemp)
+        //}
+        let filess
+        let fetchOptions = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({token: localStorage.getItem('token')})
+          }
+          fetch('http://127.0.0.1:3000/list',fetchOptions).then(response => {
+            if (response.status !== 200) {
+              console.log('Something wrong Response Status: ' + response.status)
+              return
+            }
+            else{
+              response.json().then(function(rdata) {
+                filess = localStorage.setItem('fileList', JSON.stringify(rdata))
+              })
+            }
+          })
+          //Event Handlers Client
+          let sock1 = new WebSocket("ws://localhost:5000")
+          let email = localStorage.getItem('email')
+          //let fcounter = 0
+          //sock.close()
+          sock1.onopen = function(event){
+            console.log("Connected to client")
+            //sock1.send(JSON.stringify({type: "opening", email, token: localStorage.getItem('token')}))
+          }
+          sock1.onmessage = function(event){
+           //console.log(JSON.parse(event.data))
+          }
+         sock1.onclose = function(event){
+            //console.log("Socket Clossed")          
+          }
+
+        //Event Handlers Server
+        let sock = new WebSocket("ws://localhost:3000")
+        //let email = localStorage.getItem('email')
+        let fcounter = 0
+        let downPBar, onePercent
+        $('#greetUser').html('Hello, '+localStorage.getItem('name'))
+        $("#displayName").text(localStorage.getItem('name'))
+        $("#displayEmail").text(email)
+        //sock.close()
+        sock.onopen = function(event){
+          console.log("Connected")
+          sock.send(JSON.stringify({type: "opening", email, token: localStorage.getItem('token')}))
+          
+        }
+        sock.onmessage = function(event){
+          let jsonEncryptedData = JSON.parse(event.data),
+          data  = CryptoJS.AES.decrypt(jsonEncryptedData.data, password).toString(CryptoJS.enc.Utf8),
+          jsonDecryptedData = {filename: jsonEncryptedData.filename, data, type: 'chunk'},
+          progTemplate = `<div class="row mt-2"><div class="alert alert-success col-lg-12" role="alert">${jsonDecryptedData.filename}<div class="progress" data-label=""><span id='${jsonDecryptedData.filename}_down_progress' class="value" style="width:0%;"></span></div></div></div>`
+          sock1.send(JSON.stringify(jsonDecryptedData))
+          if(jsonEncryptedData.part == 1){
+            onePercent = (1/jsonEncryptedData.totalParts*100).toFixed(4)
+            $('#modalBody').empty()
+            $('#myModal').modal({focus: true})
+            $('#modalBody').append(progTemplate)
+            downPBar = document.getElementById(jsonDecryptedData.filename+'_down_progress')
+            //console.log(downPBar)
+          }
+          //console.log(jsonEncryptedData.part)
+          //console.log(onePercent)
+          downPBar.style.width = Math.round(onePercent*jsonEncryptedData.part)+'%'
+        }
+        sock.onclose = function(event){
+          //console.log("Socket Clossed")          
+        }
+
+        $("#uploadbanner").submit(function(e) {
+          e.preventDefault()
+          let file = document.getElementById("fileupload").files[0]
+          if(file == undefined){
+            console.log('Nothing to do here!')
+            return
+          }
+          let progTemplate = `<div class="row mt-2"><div class="alert alert-success col-lg-12" role="alert">${file.name}<div class="progress" data-label="0% Complete"><span id='${file.name}_progress' class="value" style="width:0%;"></span></div></div></div>`
+          let files = JSON.parse(localStorage.getItem('fileList'))
+          files.forEach(function(filee, index){
+            if(filee.filename == file.name){
+              alert('File with the same name exists change the name of current file or delete the previous one!')
+              fcounter++
+              return
+            }
+          })
+          if(fcounter != 0){
+            return
+          }
+          if(file.size > Math.pow(10,8)){
+            alert("File size cannot exceed 100 MB")
+            return
+          }
+          files.push({filename: file.name, size: file.size, timestamp: 'Today'})
+          localStorage.setItem('fileList', JSON.stringify(files))
+          $('#progressPanel').append(progTemplate)
+          //console.log(document.getElementById("fileupload").files[0])
+          let fileName = file.name,
+          fileSize = file.size,
+          chunkSize = 60000,
+          counter = 1,
+          totalChunks = Math.ceil(fileSize/chunkSize),
+          onePerc = (1/totalChunks*100).toFixed(4),
+          start = 0,
+          count = 1,
+          progressTracker = 0,
+          pbar = document.getElementById(fileName+'_progress')
+          //passwd = localStorage.getItem('password')
+          //console.log(document.getElementById(fileName+'_progress').style.width)
+          while(counter <= totalChunks){
+            let chunk = file.slice(start, start+chunkSize)
+            let fr = new FileReader()
+            let cb = function (e) {
+              let encrypted = CryptoJS.AES.encrypt(this.result,password).toString()
+              let sntMsg = {type:'data', value: encrypted, count: count, totalCount: totalChunks, name: fileName}
+              if(count == totalChunks){
+                sntMsg.end = true
+                //console.log(sntMsg)
+              }
+              if(count == 1){
+                sntMsg.start = true
+                sntMsg.size = fileSize
+                sntMsg.timestamp = Math.floor(Date.now())
+                //sock.send(JSON.stringify(sntMsg))
+                //console.log(sntMsg)
+              }
+              sntMsg = JSON.stringify(sntMsg) //Unmark later
+              sock.send(sntMsg) //Unmark later
+              pbar.offsetParent.attributes[1].nodeValue = Math.round(onePerc*count)+'% Complete'
+              //console.log(count)
+              pbar.style.width = Math.round(onePerc*count)+'%'
+              if(pbar.offsetParent.attributes[1].nodeValue == '100% Complete'){
+                pbar.offsetParent.attributes[1].nodeValue = 'Upload Completed Successfully'
+              }
+              //console.log(Math.round(onePerc*count)+'%')
+              //console.log(pbar.style.width)
+              count++
+            }
+            fr.addEventListener("load", cb)
+            counter += 1
+            fr.readAsDataURL(chunk)
+            start += chunkSize
+          }
+        })
+        //Log out logic
+        $('#btnLogout').click(function(){
+          localStorage.clear()
+          window.location = '/'
+        })
+
+        $('#v-pills-profile-tab').click(function(){
+          $("#filePanel").empty()
+          let data = JSON.parse(localStorage.getItem('fileList'))
+          data.forEach(function(dataObj, index){
+            let cardTemplate = `<div class="col-lg-3 mt-2"  id="${dataObj.filename}_card"><div class="card"><img src="file-ico.png" class="card-img-top img-fluid" alt="..."><div class="card-body"><h6 class="card-title">${dataObj.filename}</h6>
+                <p class="card-text mb-0">${(dataObj.size/1000000).toFixed(2)}mb</p><p class="card-text">${dataObj.timestamp}</p><p class="card-text"><button class="btn-lg btn-primary mr-5 download" id="${dataObj.filename}_down_btn">Download</button><button class="btn-lg btn-danger delete" id="${dataObj.filename}_del_btn" onclick= "getElementById('${dataObj.filename}_card').style.display='none'">Delete</button></p></div></div></div>`
+                $('#filePanel').append(cardTemplate)
+              })
+          $('.download').click(function(e){
+              //console.log(e.currentTarget.attributes.id.nodeValue.replace('_down_btn',''))
+              sock.send(JSON.stringify({filename: e.currentTarget.attributes.id.nodeValue.replace('_down_btn',''), type: 'filereq'}))
+            })
+          $('.delete').click(function(e){
+              //console.log(e.currentTarget.attributes.id.nodeValue.replace('_del_btn',''))
+              let fetchOptions = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({token: localStorage.getItem('token'), filename: e.currentTarget.attributes.id.nodeValue.replace('_del_btn','')})
+              }
+              fetch('http://127.0.0.1:3000/del',fetchOptions).then(response => {
+                if (response.status !== 200) {
+                  console.log('Something wrong Response Status: ' + response.status)
+                  return
+                }
+                response.json().then(function(data) {
+                  //console.log($('#Relation.igx.zip_card'))
+                  let myObj = JSON.parse(localStorage.getItem('fileList'))
+                  myObj = myObj.filter(obj => obj.filename != e.currentTarget.attributes.id.nodeValue.replace('_del_btn',''))
+                  localStorage.setItem('fileList',JSON.stringify(myObj))
+                  console.log("Deleted Successfully")
+                })
+              })
+            })
+        })
+      })
+
+    </script>
+  </body>
+</html>

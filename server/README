@@ -1,0 +1,5 @@
+generate a new private key public key file and add them to 
+public.key and private.key files
+and mongod client should be active
+and don't forget to run
+npm install
