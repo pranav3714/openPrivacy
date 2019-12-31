@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "body-parser": "^1.19.0",
     "cluster": "^0.7.7",
     "cors": "^2.8.5",
     "data-uri-to-buffer": "^3.0.0",
+    "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "flush-buffer": "^1.2.0",
@@ -21,8 +23,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.3",
     "node-rsa": "^1.0.6",
-    "nodemailer": "^6.3.1",
-    "nodemailer-sendgrid-transport": "^0.2.0",
     "request": "^2.88.0",
     "ws": "^7.2.0"
   }
