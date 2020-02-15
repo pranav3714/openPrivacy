@@ -1,3 +1,4 @@
+require('dotenv').config()
 const ws = require("ws")
 const express = require("express")
 const bp = require("body-parser")
@@ -145,7 +146,7 @@ app.get('/admin', function (req, res) {
 
 app.post('/admin/dashboard', (req, res) => {
 	console.log(req.body)
-	mongo.adminLogin(req.body.username, req.body.password, res, userCount)
+	mongo.adminLogin(req.body.username, req.body.password, res)
 })
 
 app.get('/emailValidation', function (req, res) {
@@ -155,6 +156,22 @@ app.get('/emailValidation', function (req, res) {
 app.post('/emailValidation', function (req, res) {
 	console.log(req.body)
 	mongo.verifyUser(req.body.email, req.body.otp, res)
+})
+
+app.post('/userlist', (req, res) => {
+	if(req.body.token != process.env.ADMIN_TOKEN){
+		res.status(200).json({status: 'Token error'})
+		return
+	}
+	if(req.body.type == 'getuser'){
+		mongo.getUsers(email, res)
+	}
+	else if(req.body.type == 'deluser'){
+		mongo.delUserAndData(email, res)
+	}
+	else{
+		res.status(200).json({error: "Unknown type"})
+	}
 })
 //server routes end
 

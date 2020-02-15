@@ -2,7 +2,7 @@ require('dotenv').config()
 const MongoClient = require('mongodb').MongoClient
 const fs = require('fs')
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SEND_GRID);
+sgMail.setApiKey(process.env.SEND_GRID)
 
 const url = "mongodb://localhost:27017/"
 //ID maker xport
@@ -273,7 +273,7 @@ exports.deleteFile = function (req, res, semail, filename) {
 	})
 }
 
-exports.adminLogin = function (username, password, res, userCount) {
+exports.adminLogin = function (username, password, res) {
 	const dash = fs.readFileSync('views/admindash.ejs').toString()
 	MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
 		//console.log("Connected successfully to server")
@@ -282,6 +282,7 @@ exports.adminLogin = function (username, password, res, userCount) {
 			//console.log("Found the following records")
 			//console.log(docs)
 			//callback(docs)
+			//console.log(docs)
 			if (docs.length == 0) {
 				//console.log(docs)
 				res.status(400).json({ msg: "Invalid Credentials" })
@@ -294,7 +295,7 @@ exports.adminLogin = function (username, password, res, userCount) {
 				delete userData._id
 				delete userData.password
 				userData.msg = "Success"
-				res.status(200).send({ html: dash, userCount })
+				res.status(200).send({ html: dash,  token: process.env.ADMIN_TOKEN })
 			}
 		})
 	})
