@@ -3,3 +3,5 @@ public.key and private.key files
 and mongod client should be active
 and don't forget to run
 npm install
+
+Public and private key pairs in this repo are for demo purposes only please replace it with your key pairs.
